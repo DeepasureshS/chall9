@@ -1,35 +1,25 @@
-import React, { useEffect } from 'react';
-const WeatherCard = ({ city, onToggle, addLog }) => {
-useEffect(() => { 
-addLog(`WeatherCard Mounted: ${city.name}`) 
-}, [addLog, city]);
+import React from 'react';
+const LifecycleLogs = ({ logs, CL }) => {
 return (
-<div style={{
-border: '1px solid #ddd',
-marginBottom: '10px',
+<div style={{ marginTop: '30px' }}>
+<h2>Lifecycle Logs</h2>
+<button onClick={CL}>Clear Log</button>
+<div
+style={{
+border: '1px solid #ccc',
+marginTop: '10px',
 padding: '10px',
-borderRadius: '8px',
-backgroundColor: '#f9f9f9'
-}}>
-<h3>{city.name}</h3>
-<p>{city.temp}°C</p>
-<span style={{
-background: '#ddd',
-padding: '4px 8px',
-borderRadius: '6px'
-}}>
-{city.condition}
-</span>
-<div style={{ marginTop: '10px' }}>
-<button onClick={() => onToggle(city.id)}>
-{city.active === true ? 'Remove City' : 'Add City'}
-</button>
-</div>
-<div>
-<p>{city.condition}</p>
-<p>{city.condition}</p>
+minHeight: '100px',
+}}
+>
+{logs.length === 0 ? (
+<p>No logs yet</p>
+) : (
+logs.map((l, ind) => <p key={ind}>{l}</p>)
+)}
 </div>
 </div>
 );
 };
-export default WeatherCard;
+export default LifecycleLogs;
+
