@@ -1,27 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-const LifecycleLogs = ({ logs, CL }) => {
+const CityFilter = ({ currentFilter, onFilterChange, addLog, renderCount }) => {
+  useEffect(() => {
+    addLog('CityFilter Mounted');
+  }, [addLog]);
+
   return (
-    <div style={{ marginTop: '30px' }}>
-      <h2>Lifecycle Logs</h2>
-      <button onClick={CL}>Clear Log</button>
-      <div
-        style={{
-          border: '1px solid #ccc',
-          marginTop: '10px',
-          padding: '10px',
-          minHeight: '100px'
-        }}
+    <div style={{ marginBottom: '20px' }}>
+      <h2>Filter by Condition</h2>
+      <select
+        role='combobox'
+        value={currentFilter}
+        onChange={(e) => onFilterChange(e.target.value)}
       >
-        {logs.length === 0 ? (
-          <p>No logs yet</p>
-        ) : (
-          logs.map((l, ind) => <p key={ind}>{l}</p>)
-        )}
-      </div>
+        <option value='all'>All Conditions</option>
+        <option value='Sunny'>Sunny</option>
+        <option value='Cloudy'>Cloudy</option>
+        <option value='Rainy'>Rainy</option>
+        <option value='Snowy'>Snowy</option>
+      </select>
+      <p>Render Count: {renderCount}</p>
     </div>
   );
 };
 
-export default LifecycleLogs;
+export default CityFilter;
+
 
